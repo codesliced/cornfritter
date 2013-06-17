@@ -1,5 +1,3 @@
-# enable :sessions
-
 get '/' do
 end
 
@@ -12,14 +10,16 @@ get '/:screenname' do
     @user.tweets.destroy_all
     @user.fetch_tweets!
   end
-
-
   @last_ten = @user.tweets.limit(10)
   erb :index
 end
 
-
-
+post '/freshen' do
+  @user = TwitterUser.find_or_create_by_screen_name(params[:screenname])
+  @user.inspect
+  @last_ten = @user.tweets.limit(10)
+  erb :_tweets, :layout => false
+end
 
 
 

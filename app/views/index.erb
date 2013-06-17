@@ -1,15 +1,10 @@
-
 <div class="container">
      
   <div class="username">
-    <%= @user.screen_name %>
+   <p><%= @user.screen_name %></p>
   </div>
   <div class="tweet">
-    <ul>
-    <% @last_ten.each do |tweet| %>
-       <li><%= tweet.text %> </li>
-    <% end %>
-  </ul>
+    <%= erb :_spinner, :layout => false %>
   </div>
 
 </div>

@@ -10,8 +10,8 @@ class TwitterUser < ActiveRecord::Base
 
   def tweets_stale?
     minutes = (Time.now - self.updated_at)/60
-    return false if minutes < 15
-    return true if minutes >= 15
+    return false if minutes < 1
+    return true if minutes >= 1
   end
 
 end

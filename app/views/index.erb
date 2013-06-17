@@ -1,7 +1,16 @@
 
 <div class="container">
      
-     <h1> Welcome! </h1>
+  <div class="username">
+    <%= @user.screen_name %>
+  </div>
+  <div class="tweet">
+    <ul>
+    <% @last_ten.each do |tweet| %>
+       <li><%= tweet.text %> </li>
+    <% end %>
+  </ul>
+  </div>
 
 </div>
 

@@ -1,8 +1,31 @@
 # enable :sessions
 
 get '/' do
+end
+
+get '/:screenname' do
+  @user = TwitterUser.find_or_create_by_screen_name(params[:screenname])
+
+  if @user.tweets.empty?
+    @user.fetch_tweets!
+  elsif @user.tweets_stale?
+    @user.tweets.destroy_all
+    @user.fetch_tweets!
+  end
+
+
+  @last_ten = @user.tweets.limit(10)
   erb :index
 end
+
+
+
+
+
+
+# =============================================
+#   Login stuff
+# =============================================
 
 get '/login' do
   erb :login

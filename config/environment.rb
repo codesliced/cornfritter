@@ -23,6 +23,8 @@ require 'erb'
 
 require 'faker'
 
+require 'twitter'
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
@@ -34,3 +36,18 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+# Twitter oauth
+# load yaml file
+SETTINGS = YAML.load_file(File.expand_path('../twitter.yml', __FILE__))
+# SETTINGS = YAML.load_file(File.open('../twitter.yml'))
+SETTINGS.each_pair do |key, value|
+  ENV[key] = value
+end
+
+Twitter.configure do |config|
+  config.consumer_key = ENV["consumer_key"]
+  config.consumer_secret = ENV["consumer_secret"]
+  config.oauth_token = ENV["oauth_token"]
+  config.oauth_token_secret = ENV["oauth_token_secret"]
+end

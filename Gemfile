@@ -18,6 +18,8 @@ gem 'rake'
 gem 'shotgun'
 gem 'bcrypt-ruby'
 gem 'faker'
+gem 'twitter'
+gem 'json', '~> 1.7.7'
 
 group :test do
   gem 'rspec'
